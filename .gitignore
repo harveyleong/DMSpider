@@ -1,0 +1,5 @@
+# Python temporary code file
+*.py[cod]
+
+# Python virtual environment
+venv/*

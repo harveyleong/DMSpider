@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+
+"""DMSpider.
+
+Usage:
+    crawl comic [ -p <path> ] <url>
+    crawl comic [ -p <path> ] -f <file>
+    crawl chapter [ -p <path> ] <url>
+    crawl chapter [ -p <path> ] -f <file>
+
+Options:
+    -h --help         Show this screen.
+    --version         Show version.
+    -f <file>         Input file which have some urls.
+    -p <path>         Saved directory.
+"""
+
+
+from docopt import docopt
+
+from spider import download
+
+
+def main(arguments):
+    is_comic = arguments["comic"]
+    saved_path = arguments["-p"] if arguments["-p"] else None
+    if arguments["-f"]:
+        with open(arguments["-f"], "r") as f:
+            urls = f.readlines()
+    else:
+        urls = [arguments["<url>"]]
+    download(urls, is_comic, path=saved_path)
+
+
+if __name__ == "__main__":
+    arguments = docopt(__doc__, version="DMSpider 1.0")
+    main(arguments)
