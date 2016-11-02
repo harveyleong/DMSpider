@@ -4,13 +4,13 @@
 
 ## 用法
 
-crawl chapter [ -p <PATH> ] <URL>
+crawl chapter [ -p PATH ] URL
 
-crawl chapter [ -p <PATH> ] -f <FILE>
+crawl chapter [ -p PATH ] -f FILE
 
-crawl comic [ -p <PATH> ] <URL>
+crawl comic [ -p PATH ] URL
 
-crawl comic [ -p <PATH> ] -f <FILE>
+crawl comic [ -p PATH ] -f FILE
 
 ### 选项
 
