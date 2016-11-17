@@ -3,16 +3,19 @@
 """DMSpider.
 
 Usage:
-    crawl comic [ -p <path> ] <url>
-    crawl comic [ -p <path> ] -f <file>
-    crawl chapter [ -p <path> ] <url>
-    crawl chapter [ -p <path> ] -f <file>
+    crawl comic [ -p <path> -z ] <url>
+    crawl comic [ -p <path> -z ] -f <file>
+    crawl chapter [ -p <path> -z ] <url>
+    crawl chapter [ -p <path> -z ] -f <file>
+    crawl ( -h | --help )
+    crawl --version
 
 Options:
     -h --help         Show this screen.
     --version         Show version.
     -f <file>         Input file which have some urls.
     -p <path>         Saved directory.
+    -z                Compress folder.
 """
 
 
@@ -29,9 +32,9 @@ def main(arguments):
             urls = f.readlines()
     else:
         urls = [arguments["<url>"]]
-    download(urls, is_comic, path=saved_path)
+    download(urls, is_comic, path=saved_path, zip=arguments["-z"])
 
 
 if __name__ == "__main__":
-    arguments = docopt(__doc__, version="DMSpider 1.0")
+    arguments = docopt(__doc__, version="DMSpider 1.1")
     main(arguments)

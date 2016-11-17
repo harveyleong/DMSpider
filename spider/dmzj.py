@@ -76,12 +76,12 @@ class Comic(DMZJ):
         """Downloads all chapter in this comic."""
 
         self.chapter_urls = self.get_chapter_url()
-        saved_path = self.create_directory(path)
+        self.saved_path = self.create_directory(path)
 
         for url in self.chapter_urls:
             try:
                 chapter = Chapter(url)
-                chapter.download(saved_path)
+                chapter.download(self.saved_path)
             except DMException as e:
                 print(e)
                 continue
@@ -135,7 +135,7 @@ class Chapter(DMZJ):
         """Downloads all pictures in this chapter."""
 
         self.picture_urls = self.get_picture_url()
-        saved_path = self.create_directory(path)
+        self.saved_path = self.create_directory(path)
         headers = {
             "User-Agent": "Mozilla/5.0 (Window NT 6.2; WOW64; rv:48.0)"
                           + " Gecko/2010010 Firefox/48.0",
@@ -145,7 +145,7 @@ class Chapter(DMZJ):
         for i in range(len(self.picture_urls)):
             try:
                 picture = self.get_content(self.picture_urls[i], False, headers=headers)
-                with open(os.path.join(saved_path, str(i) + ".jpg"), "wb") as f:
+                with open(os.path.join(self.saved_path, str(i) + ".jpg"), "wb") as f:
                     f.write(picture)
             except RequestException as e:
                 print(e)
